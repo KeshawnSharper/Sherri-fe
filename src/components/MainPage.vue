@@ -16,7 +16,7 @@ onMounted(() => {
   const end = route.indexOf("&")
   const token = route.substring(start+1,end)
   console.log(token)
-  axios.post(`http://localhost:3000/token/`,{"token": token})
+  axios.post(`https://sherri-commands-api.onrender.com/token/`,{"token": token})
         .then(res => console.log(res.data))
         .catch(err => console.log(err))
   }
@@ -245,12 +245,12 @@ function takeCommand(message){
         result = result.replace("siri","")
         console.log(result)
         if (result.includes("weather") || result.includes("forecast")){
-          axios.get(`http://localhost:3000/weather/${result}`)
+          axios.get(`https://sherri-commands-api.onrender.com/weather/${result}`)
         .then(res => speak(res.data))
         .catch(err => console.log(err))
         }
         else{
-        axios.get(`http://localhost:3000/ai/${result}`)
+        axios.get(`https://sherri-commands-api.onrender.com/ai/${result}`)
         .then(res => speak(res.data))
         .catch(err => console.log(err))
         }
@@ -258,7 +258,7 @@ function takeCommand(message){
     else if(message.includes("play")){
         let result = message.replace("play","") + " lyrics"
         console.log(result)
-        axios.get(`http://localhost:3000/youtube/${result}`).then(res => {
+        axios.get(`https://sherri-commands-api.onrender.com/youtube/${result}`).then(res => {
         // console.log(res))
         speak(`Play ${result}...`)
         const audio = new Audio(res.data);
